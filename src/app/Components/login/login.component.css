@@ -1,0 +1,11 @@
+.login-container {
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+.login-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}

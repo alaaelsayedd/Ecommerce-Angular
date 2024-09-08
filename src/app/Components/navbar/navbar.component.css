@@ -1,0 +1,7 @@
+ul li{
+    font-weight:400;
+    color: lightgray;
+}
+.active{
+     font-weight: 500;
+}
