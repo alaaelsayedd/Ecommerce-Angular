@@ -21,7 +21,7 @@
     <div class="row">
       <!-- Loop through each item in the cart -->
       @for (item of allCartItem.items; track $index) {
-      <div class="col-md-4 col-12 me-2 p-1 mb-4">
+      <div class="col-md-4 col-12  p-1 mb-4">
         <div class="card bg-light">
           <!-- Product Image -->
           <img [src]="item.image" class="card-img-top" alt="{{ item.title }}" />

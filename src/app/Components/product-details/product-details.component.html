@@ -24,14 +24,23 @@
       <p><strong>Weight:</strong> {{ productData[0].weight }} kg</p>
       <p>
         <strong>Dimensions:</strong>
-        {{ productData[0].dimensions?.width || 'N/A' }} (W) x
-        {{ productData[0].dimensions?.height || 'N/A' }} (H) x
-        {{ productData[0].dimensions?.depth || 'N/A' }} (D)
+        {{ productData[0].dimensions?.width || "N/A" }} (W) x
+        {{ productData[0].dimensions?.height || "N/A" }} (H) x
+        {{ productData[0].dimensions?.depth || "N/A" }} (D)
       </p>
       <p><strong>Shipping:</strong> {{ productData[0].shippingInformation }}</p>
-      <p><strong>Availability Status:</strong> {{ productData[0].availabilityStatus }}</p>
+      <p>
+        <strong>Availability Status:</strong>
+        {{ productData[0].availabilityStatus }}
+      </p>
       <p><strong>Return Policy:</strong> {{ productData[0].returnPolicy }}</p>
-      <button class="btn btn-primary col-6 mx-auto">Add to Cart</button>
+      <button
+        class="btn btn-primary col-6 mx-auto"
+        (click)="addToCart(productData[0])"
+        [disabled]="productData[0].availabilityStatus !== 'In Stock'"
+      >
+        Add to Cart
+      </button>
     </div>
   </div>
 

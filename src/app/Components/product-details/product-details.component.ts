@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { ActivatedRoute } from '@angular/router';
+import { CartService } from '../../Services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,6 +16,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private Allproduct: ProductService,
+    private cartService:CartService,
     private route: ActivatedRoute
   ) {}
 
@@ -29,5 +31,19 @@ export class ProductDetailsComponent implements OnInit {
       // Ensure the productData is logged for debugging
       console.log(this.productData);
     });
+  }
+  addToCart(product: any): void {
+   
+    this.cartService.addCartItem(product.id).subscribe(
+      (response) => {
+       
+
+        alert(`${product.title} has been added to the cart.`);
+      },
+      (error) => {
+      
+        alert('Failed to add product to cart.');
+      }
+    );
   }
 }
