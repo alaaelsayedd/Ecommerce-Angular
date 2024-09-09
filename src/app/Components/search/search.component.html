@@ -1,0 +1,50 @@
+ <div class="container p-5">
+<div class="row">
+  <div class="mb-3">
+    <input type="text" class="form-control" [(ngModel)]="searchValue" />
+  </div>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  @for (product of searchResult; track product.id) {
+  <div class="col">
+    <div class="cardd bg-light">
+      <a [routerLink]="['/prodetails', product.id]">
+        <div class="imge">
+          <div
+            class="stock"
+            [ngClass]="
+              product?.availabilityStatus == 'In Stock' ? 'bg-green' : 'bg-red'
+            "
+          >
+            @if (product.availabilityStatus=='In Stock') { in Stock } @else {
+            out of stock }
+          </div>
+
+          <img [src]="product.images[0]" alt="" class="w-100 h-100" />
+        </div>
+      </a>
+      <div class="content py-2 px-2">
+        <div class="d-flex justify-content-between">
+          <h2>{{ product.title.split(" ").slice(0, 3).join(" ") }}</h2>
+          <p>{{ product.price }}$</p>
+        </div>
+
+        <p class="des">
+          {{ product.description.split(" ").slice(0, 8).join(" ") }}
+        </p>
+      </div>
+      <button
+        class="btn btn-outline-secondary"
+        (click)="addToCart(product)"
+        [disabled]="product.availabilityStatus !== 'In Stock'"
+      >
+        Add To Cart
+      </button>
+    </div>
+  </div>
+
+  }@empty {
+  <h3 class="my-5 fs-5  col-12">No Data Founded!</h3>
+  }
+</div>
+</div>

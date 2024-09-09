@@ -1,0 +1,77 @@
+<!-- Add this to the top of your component's HTML -->
+@if (isLoading) {
+<div class="loading-overlay">
+  <div class="spinner"></div>
+</div>
+} @else {
+<div class="container mt-5">
+  <!-- Display total cart price -->
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-end">
+        Total Price:
+        {{ allCartItem.totalPrice | currency : "USD" : "symbol" : "1.0-0" }}
+      </h3>
+    </div>
+  </div>
+
+  <!-- Check if there are items in the cart -->
+  @if (allCartItem?.items?.length > 0) {
+  <div>
+    <div class="row">
+      <!-- Loop through each item in the cart -->
+      @for (item of allCartItem.items; track $index) {
+      <div class="col-md-4 col-12 me-2 p-1 mb-4">
+        <div class="card bg-light">
+          <!-- Product Image -->
+          <img [src]="item.image" class="card-img-top" alt="{{ item.title }}" />
+          <div class="card-body">
+            <!-- Product Title -->
+            <h5 class="card-title">{{ item.title }}</h5>
+            <!-- Product Price -->
+            <p class="card-text">Price: {{ item.price }}</p>
+            <!-- Product Quantity -->
+
+            <!-- Cart item control buttons -->
+            <div class="d-flex justify-content-between">
+              <button
+                class="btn btn-danger"
+                (click)="removeCartItem(item.productId)"
+              >
+                Remove
+              </button>
+              <div class="d-flex justify-content-between align-items-baseline">
+                <button
+                  class="btn btn-outline-primary me-2"
+                  (click)="
+                    updateItemQuantity(item.productId, item.quantity + 1)
+                  "
+                >
+                  +
+                </button>
+                {{ item.quantity }}
+                <button
+                  class="btn btn-outline-secondary ms-2"
+                  (click)="
+                    updateItemQuantity(item.productId, item.quantity - 1)
+                  "
+                >
+                  -
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+
+  <!-- If cart is empty -->
+  @else if (!allCartItem || allCartItem?.items?.length === 0) {
+  <p class="text-center fs-1 p-3">Cart is empty</p>
+  }
+</div>
+
+}
